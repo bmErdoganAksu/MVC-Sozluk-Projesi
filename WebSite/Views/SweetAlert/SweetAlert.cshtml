@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "SweetAlert";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>SweetAlert</h2>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<button class="btn btn-primary" id="btn1">Alert Buton</button>
+<button class="btn btn-warning" id="btn2">Alert Buton2</button>
+<button class="btn btn-danger" id="btn3">Alert Buton3</button>
+
+
+<script>
+    $('#btn1').click(function () {
+
+        swal("MVC proje Kampı Sweet Alert!");
+
+    });
+</script>
+
+<script>
+    $('#btn2').click(function () {
+
+        swal("Burası başlık!", "Burası ise text!");
+
+    });
+</script>
+
+<script>
+    $('#btn3').click(function () {
+
+        swal("Tebrikler!", "Ekleme Başarılı!", "success");
+
+    });
+</script>

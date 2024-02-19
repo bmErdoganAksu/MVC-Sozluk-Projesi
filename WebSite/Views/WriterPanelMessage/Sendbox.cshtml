@@ -1,0 +1,153 @@
+﻿@using EntityLayer.Concrete
+@model List<Message>
+
+@{
+    ViewBag.Title = "Sendbox";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<title>Yazar Giden Mesaj Sayfası</title>
+<html>
+<body class="hold-transition sidebar-mini">
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Yazar Mesaj Sayfası</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            @Html.Action("MessageListMenu", "WriterPanelMessage")
+            <div class="col-md-9">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Gönderilen Mesajlar</h3>
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" placeholder="Mail Kutusunda Ara">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary search-button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-0">
+                        <div class="mailbox-controls">
+                            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                                <i class="far fa-square"></i>
+                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm delete-button">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm reply-button">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm share-button">
+                                    <i class="fas fa-share"></i>
+                                </button>
+                            </div>
+                            <button type="button" class="btn btn-default btn-sm refresh-button">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <div class="float-right">
+                                1-50/200
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive mailbox-messages">
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="icheck-primary">
+                                                    <input type="checkbox" value="" id="check@(item.messageID)">
+                                                    <label for="check@(item.messageID)"></label>
+                                                </div>
+                                            </td>
+                                            <td class="mailbox-star">
+                                                <a href="/WriterPanelMessage/GetSendboxMessageDetails/@item.messageID">
+                                                    <i class="fas fa-star text-warning"></i>
+                                                </a>
+                                            </td>
+                                            <td class="mailbox-name">
+                                                <a href="/WriterPanelMessage/GetSendboxMessageDetails/@item.messageID">
+                                                    @Html.DisplayFor(modelItem => item.receiverMail)
+                                                </a>
+                                            </td>
+                                            <td class="mailbox-subject">
+                                                <b>@Html.DisplayFor(modelItem => item.subject)</b>
+                                                @if (!string.IsNullOrEmpty(item.messageContext) && item.messageContext.Length >= 5)
+                                                {
+                                                    @Html.Raw(System.Net.WebUtility.HtmlEncode(item.messageContext.Substring(0, 5)))
+                                                }
+                                            </td>
+                                            <td class="mailbox-attachment"></td>
+                                            <td class="mailbox-date">
+                                                @(((DateTime)item.messageDate).ToString("dd-MMM-yyyy"))
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card-footer p-0">
+                        <div class="mailbox-controls">
+                            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                                <i class="far fa-square"></i>
+                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm delete-button">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm reply-button">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm share-button">
+                                    <i class="fas fa-share"></i>
+                                </button>
+                            </div>
+                            <button type="button" class="btn btn-default btn-sm refresh-button">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <div class="float-right">
+                                1-50/200
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+</body>
+</html>

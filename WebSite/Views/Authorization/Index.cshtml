@@ -1,0 +1,52 @@
+﻿@using EntityLayer.Concrete
+@model List<Admin>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<title>Admin Yetkilendirme Sayfası</title>
+<br />
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Kategori Adı</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+            <th>Baslıklar</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.adminID</td>
+                <td>@item.adminUserName</td>
+                <td>@item.adminRole</td>
+                <td>Aktif</td>
+                <td><a href="~/AdminCategory/DeleteCategory/@item.adminID" class="btn btn-danger">Pasif Yap</a></td>
+                <td><a href="~/Authorization/EditAdmin/@item.adminID" class="btn btn-warning">Yetkisini Değiştir</a></td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Kullanıcı Mail</th>
+            <th>Yetki</th>
+            <th>Status</th>
+            <th>Pasif Yap</th>
+            <th>Yetkiyi Değiştir</th>
+        </tr>
+
+    </table>
+    <p>No data available.</p>
+}
+<a href="~/Authorization/AddAdmin/" class="btn btn-info">Yeni Admin Tanımla</a>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>

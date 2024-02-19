@@ -1,0 +1,52 @@
+﻿@using EntityLayer.Concrete
+@model List<Category>
+
+@{
+    ViewBag.Title = "Admin Sayfası";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+<br />
+<title>Admin Kategoriler Sayfası</title>
+<h3>Mvc Kamp Admin Sayfası </h3>
+<br />
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Kategori Adı</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+            <th>Baslıklar</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CategoryID</td>
+                <td>@item.CategoryName</td>
+                <td><a href="~/AdminCategory/DeleteCategory/@item.CategoryID" class="btn btn-danger">Sil</a></td>
+                  <td><a href="~/AdminCategory/EditCategory/@item.CategoryID" class="btn btn-warning">Güncelle</a></td>
+                <td><a href="~/Heading/Index/@item.CategoryID" class="btn btn-primary">Başlıklar</a></td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Kategori Adı</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+            <th>Baslıklar</th>
+        </tr>
+
+    </table>
+    <p>No data available.</p>
+}
+<a href="~/AdminCategory/AddCategory/" class="btn btn-info">Yeni Kategori Ekle</a>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>

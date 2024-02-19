@@ -1,0 +1,32 @@
+﻿@model EntityLayer.Concrete.Category
+
+@{
+    ViewBag.Title = "EditCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+<br />
+<h2>Güncelleme Sayfası</h2>
+<title>Admin Yeni Kategori Güncelleme Sayfası</title>
+<!--Form Başlat FormMethodu Post olsun-->
+@using (Html.BeginForm("EditCategory", "AdminCategory", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.CategoryID)
+
+<div class="form-group">
+    @Html.Label("Kategori Adı")
+    @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.CategoryName)
+    <br /><br />
+    @Html.Label("Açıklama")
+    @Html.TextAreaFor(x => x.CategoryDescription, new { @class = "form-control" })
+    <br /><br />
+    @Html.Label("Status")
+    @Html.DropDownListFor(x => x.CategoryStatus, (List<SelectListItem>)ViewBag.vlc, "Bir Status Seçin", new { @class = "form-control" })
+    <button class="btn btn-success">Güncelle</button>
+    <a href="~/AdminCategory" class="btn btn-info">Ana Sayfa</a>
+</div>
+}
+
